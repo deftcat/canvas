@@ -6,7 +6,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./circles.component.css']
 })
 export class CirclesComponent implements OnInit {
-  width: string = window.innerWidth.toString() + 'px';
+  width: number = window.innerWidth;
+  height : number = window.innerHeight;
   x: number;
   @ViewChild('myCanvas') canvasRef: ElementRef;
   context: CanvasRenderingContext2D;
