@@ -7,10 +7,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class CirclesComponent implements OnInit {
   width: number = window.innerWidth;
-  height : number = window.innerHeight;
+  height: number = window.innerHeight;
   x: number;
+  y: number;
+  dx: number;
+  radious: number;
   @ViewChild('myCanvas') canvasRef: ElementRef;
-  context: CanvasRenderingContext2D;
+  // context: CanvasRenderingContext2D;
+  ctx: CanvasRenderingContext2D;
   constructor() { }
 
   ngOnInit() {
@@ -21,8 +25,12 @@ export class CirclesComponent implements OnInit {
 
 
     //use draw is better
-    this.context = this.canvasRef.nativeElement.getContext("2d");
-    this.x = 0;
+    // this.context = this.canvasRef.nativeElement.getContext("2d");
+    this.ctx = this.canvasRef.nativeElement.getContext("2d");
+    this.dx = 10;
+    this.radious = 40;
+    this.x = 0 + this.radious;
+    this.y = 0 + this.radious;
     this.draw();
   }
 
@@ -32,21 +40,17 @@ export class CirclesComponent implements OnInit {
       this.draw();
       // console.log('here');
     });
-    let ctx = this.context;
-    // for (this.x = 0; this.x+= 0.1; this.x < window.innerWidth){
-    ctx.beginPath();
-    ctx.arc(this.x, 50, 4, 0, Math.PI * 2, false);
-    // ctx.str
-    ctx.strokeStyle = 'pink';
-    ctx.stroke();
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, this.radious, 0, Math.PI * 2, false);
+    this.ctx.strokeStyle = 'purple';
+    this.ctx.stroke();
+    this.dx = (this.x > this.width - this.radious) ? -this.dx : this.dx;
+    this.dx = (this.x < 0 + this.radious) ? -this.dx : this.dx;
+    // if (this.x > this.width){
+    //   this.dx = -this.dx;
     // }
-
-    // this.x += 0.1;
-
-    // ctx.fillRect
-    // ctx.clearRect(0, 0, 400, 400);
-    // ctx.fillStyle = 'blue';
-    // ctx.fillRect(0, 0, 50, 60);
+    this.x += this.dx;
   }
 
 }
