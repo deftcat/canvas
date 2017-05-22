@@ -11,6 +11,7 @@ export class CirclesComponent implements OnInit {
   x: number;
   y: number;
   dx: number;
+  dy : number;
   radious: number;
   @ViewChild('myCanvas') canvasRef: ElementRef;
   // context: CanvasRenderingContext2D;
@@ -28,6 +29,7 @@ export class CirclesComponent implements OnInit {
     // this.context = this.canvasRef.nativeElement.getContext("2d");
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
     this.dx = 10;
+    this.dy = 20;
     this.radious = 40;
     this.x = 0 + this.radious;
     this.y = 0 + this.radious;
@@ -45,12 +47,10 @@ export class CirclesComponent implements OnInit {
     this.ctx.arc(this.x, this.y, this.radious, 0, Math.PI * 2, false);
     this.ctx.strokeStyle = 'purple';
     this.ctx.stroke();
-    this.dx = (this.x > this.width - this.radious) ? -this.dx : this.dx;
-    this.dx = (this.x < 0 + this.radious) ? -this.dx : this.dx;
-    // if (this.x > this.width){
-    //   this.dx = -this.dx;
-    // }
+    this.dx = ((this.x > this.width - this.radious) || (this.x < 0 + this.radious)) ? -this.dx : this.dx;
+    this.dy = ((this.y > this.height - this.radious) || (this.y < 0 + this.radious)) ? -this.dy : this.dy;
     this.x += this.dx;
+    this.y +=this.dy;
   }
 
 }
