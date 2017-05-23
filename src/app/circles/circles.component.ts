@@ -14,7 +14,8 @@ export class CirclesComponent implements OnInit {
   dx: number;
   dy: number;
   radious: number;
-  circle: Circle;
+  // circle: Circle;
+  circles : Circle[]=[];
   @ViewChild('myCanvas') canvasRef: ElementRef;
   // context: CanvasRenderingContext2D;
   ctx: CanvasRenderingContext2D;
@@ -30,13 +31,25 @@ export class CirclesComponent implements OnInit {
     //use draw is better
     // this.context = this.canvasRef.nativeElement.getContext("2d");
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
-    this.dx = (Math.random() - 0.5) * 10;
-    this.dy = (Math.random() - 0.5) * 10;
-    this.radious = 40;
-    this.x = Math.random() * this.width;//0 + this.radious;
-    this.y = Math.random() * this.height;//0 + this.radious;
-    this.circle = new Circle(this.x, this.y, this.dx, this.dy, this.radious);
-    this.animate();
+    for (let index : number = 0; index < 100; index++) {
+
+      this.dx = (Math.random() - 0.5) * 10;
+      this.dy = (Math.random() - 0.5) * 10;
+      this.radious = 40;
+      this.x = Math.random() * this.width;//0 + this.radious;
+      this.y = Math.random() * this.height;//0 + this.radious;
+      // debugger;
+      // this.circle = new Circle(this.x, this.y, this.dx, this.dy, this.radious);
+      this.circles.push(new Circle(this.x, this.y, this.dx, this.dy, this.radious));
+      // console.log(this.circle);
+      
+      // this.circle.push(new Circle(this.x, this.y, this.dx, this.dy, this.radious));
+
+    }
+    console.log(this.circles);
+    
+    // this.circle = new Circle(this.x, this.y, this.dx, this.dy, this.radious);
+    // this.animate();
 
   }
 
