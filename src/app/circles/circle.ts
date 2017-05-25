@@ -7,12 +7,13 @@ export class Circle {
     color: string;
     ctx: CanvasRenderingContext2D;
     maxRadious: number = 50;
+    minRadious : number = 1;
     constructor(x: number, y: number, dx: number, dy: number, radious: number = 40) {
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        this.radious = radious;
+        this.radious = radious ? radious : this.minRadious;
         this.color = this.getRandomColor();
     }
     getRandomColor(): string {
@@ -43,7 +44,7 @@ export class Circle {
             if (this.radious < this.maxRadious) {
                 this.radious += 1;
             }
-        } else if (this.radious > 1) {
+        } else if (this.radious > this.minRadious) {
             this.radious -= 1;
         }
         // this.ctx.fillStyle = Math.random();

@@ -35,7 +35,7 @@ export class CirclesComponent implements OnInit {
 
       this.dx = (Math.random() - 0.5) * 10;
       this.dy = (Math.random() - 0.5) * 10;
-      this.radious = 40;
+      this.radious = 4;
       this.x = Math.random() * (this.width - this.radious * 2) + this.radious;//0 + this.radious;
       this.y = Math.random() * (this.height - this.radious * 2) + this.radious;//0 + this.radious;
       this.circles.push(new Circle(this.x, this.y, this.dx, this.dy, this.radious));
