@@ -31,15 +31,13 @@ export class CirclesComponent implements OnInit {
     //use draw is better
     // this.context = this.canvasRef.nativeElement.getContext("2d");
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
-    for (let index: number = 0; index < 100; index++) {
+    for (let index: number = 0; index < 500; index++) {
 
       this.dx = (Math.random() - 0.5) * 10;
       this.dy = (Math.random() - 0.5) * 10;
       this.radious = 40;
       this.x = Math.random() * (this.width - this.radious * 2) + this.radious;//0 + this.radious;
       this.y = Math.random() * (this.height - this.radious * 2) + this.radious;//0 + this.radious;
-      // debugger;
-      // this.circle = new Circle(this.x, this.y, this.dx, this.dy, this.radious);
       this.circles.push(new Circle(this.x, this.y, this.dx, this.dy, this.radious));
     }
     // this.circle = new Circle(this.x, this.y, this.dx, this.dy, this.radious);
@@ -55,8 +53,8 @@ export class CirclesComponent implements OnInit {
     });
     for (let index = 0; index < this.circles.length; index++) {
       this.circles[index].draw(this.ctx);
-      //interactive
-      this.circles[index].update(this.width, this.height);
+
+      this.circles[index].update(this.width, this.height, this.mouse[this.x], this.mouse[this.y]);
 
     }
   }
@@ -64,11 +62,11 @@ export class CirclesComponent implements OnInit {
     onMousemove(event: MouseEvent) {
       this.mouse[this.x] = event.x;
       this.mouse[this.y] = event.y ;
-      console.log(this.mouse[this.x]);
+      // console.log(this.mouse[this.x]);
    
         }
     // popUp(event){
-      // add (mousemove)='popUp($event)' in dom
+      // add (mousemove)='popUp($event)' in dom, remember $ sign
     //   console.log(event.x);
     //   console.log(event.y);
     // }
