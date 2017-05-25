@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Circle } from './circle';
 
 @Component({
@@ -16,6 +16,7 @@ export class CirclesComponent implements OnInit {
   radious: number;
   // circle: Circle;
   circles: Circle[] = [];
+  mouse : object = {x : undefined, y : undefined};
   @ViewChild('myCanvas') canvasRef: ElementRef;
   // context: CanvasRenderingContext2D;
   ctx: CanvasRenderingContext2D;
@@ -54,9 +55,22 @@ export class CirclesComponent implements OnInit {
     });
     for (let index = 0; index < this.circles.length; index++) {
       this.circles[index].draw(this.ctx);
+      //interactive
       this.circles[index].update(this.width, this.height);
 
     }
   }
+   @HostListener('mousemove', ['$event'])
+    onMousemove(event: MouseEvent) {
+      this.mouse[this.x] = event.x;
+      this.mouse[this.y] = event.y ;
+      console.log(this.mouse[this.x]);
+   
+        }
+    // popUp(event){
+      // add (mousemove)='popUp($event)' in dom
+    //   console.log(event.x);
+    //   console.log(event.y);
+    // }
 
 }

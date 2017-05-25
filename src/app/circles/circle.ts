@@ -12,7 +12,7 @@ export class Circle {
         this.dy = dy;
         this.radious = radious;
     }
-    draw(ctx) {
+    draw(ctx : CanvasRenderingContext2D) {
         this.ctx = ctx;
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radious, 0, Math.PI * 2, false);
