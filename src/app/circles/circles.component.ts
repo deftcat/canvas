@@ -7,8 +7,9 @@ import { Circle } from './circle';
   styleUrls: ['./circles.component.css']
 })
 export class CirclesComponent implements OnInit {
-  width: number = window.innerWidth;
-  height: number = window.innerHeight;
+  title: string = 'defaule';
+  width: number; //= window.innerWidth - 10;
+  height: number;// = window.innerHeight;
   x: number;
   y: number;
   dx: number;
@@ -16,11 +17,16 @@ export class CirclesComponent implements OnInit {
   radious: number;
   // circle: Circle;
   circles: Circle[] = [];
-  mouse : object = {x : undefined, y : undefined};
+  mouse: object = { x: undefined, y: undefined };
   @ViewChild('myCanvas') canvasRef: ElementRef;
   // context: CanvasRenderingContext2D;
   ctx: CanvasRenderingContext2D;
-  constructor() { }
+  constructor() {
+    //defualt value setting
+    this.title = 'Jumping Circle';
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+  }
 
   ngOnInit() {
     // let ctx = this.context;
@@ -32,7 +38,6 @@ export class CirclesComponent implements OnInit {
     // this.context = this.canvasRef.nativeElement.getContext("2d");
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
     for (let index: number = 0; index < 500; index++) {
-
       this.dx = (Math.random() - 0.5) * 10;
       this.dy = (Math.random() - 0.5) * 10;
       this.radious = 4;
@@ -53,22 +58,24 @@ export class CirclesComponent implements OnInit {
     });
     for (let index = 0; index < this.circles.length; index++) {
       this.circles[index].draw(this.ctx);
-
       this.circles[index].update(this.width, this.height, this.mouse[this.x], this.mouse[this.y]);
 
     }
   }
-   @HostListener('mousemove', ['$event'])
-    onMousemove(event: MouseEvent) {
-      this.mouse[this.x] = event.x;
-      this.mouse[this.y] = event.y ;
-      // console.log(this.mouse[this.x]);
-   
-        }
-    // popUp(event){
-      // add (mousemove)='popUp($event)' in dom, remember $ sign
-    //   console.log(event.x);
-    //   console.log(event.y);
-    // }
+  @HostListener('mousemove', ['$event'])
+  onMousemove(event: MouseEvent) {
+    this.mouse[this.x] = event.x;
+    this.mouse[this.y] = event.y;
+    // console.log(this.mouse[this.x]);
 
+  }
+  // popUp(event){
+  // add (mousemove)='popUp($event)' in dom, remember $ sign
+  //   console.log(event.x);
+  //   console.log(event.y);
+  // }
+  //* capture the window:resize event and reset the canvas size
+  resize(event) {
+    this.width = window.innerWidth;
+  }
 }
