@@ -23,7 +23,7 @@ export class GravityComponent implements OnInit {
 
   ngOnInit() {
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
-    this.ball = new Ball(this.width / 2, this.height / 2, this.radious, 'red');
+    this.ball = new Ball(this.width / 2, this.height / 2,1, this.radious, 'red');
     this.animation();
   }
   animation() {
@@ -34,7 +34,7 @@ export class GravityComponent implements OnInit {
     });
 
     this.ball.draw(this.ctx);
-    this.ball.update(3);
+    this.ball.update(this.height);
 }
   resize() {
 
