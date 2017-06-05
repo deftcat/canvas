@@ -14,7 +14,7 @@ export class GravityComponent implements OnInit {
   @ViewChild('gravity') canvasRef: ElementRef;
   // ctx:Canvas2DContextAttributes;
   ctx: CanvasRenderingContext2D;
-  ball: Ball;
+  ball: Ball[] = [];
   constructor() {
     this.height = window.innerHeight;
     this.width = window.innerWidth;
@@ -23,7 +23,9 @@ export class GravityComponent implements OnInit {
 
   ngOnInit() {
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
-    this.ball = new Ball(this.width / 2, this.height / 2,1, this.radious, 'red');
+    for (let i = 0; i < 10; i++) {
+      this.ball.push(new Ball(Math.random() * (this.width - this.radious) + this.radious, this.height / 2 - Math.random() * this.height, 1, this.radious));
+    }
     this.animation();
   }
   animation() {
@@ -32,10 +34,16 @@ export class GravityComponent implements OnInit {
     requestAnimationFrame(() => { //remember add it!!!!!!
       this.animation();
     });
+    // this.ball.forEach(function(ball, i){
+    //   console.log(typeof(ball));
+    //   ball[i].draw(ctx);
 
-    this.ball.draw(this.ctx);
-    this.ball.update(this.height);
-}
+    // });
+    for (let index = 0; index < this.ball.length; index++) {
+      this.ball[index].draw(this.ctx);
+      this.ball[index].update(this.height);
+    }
+  }
   resize() {
 
   }
