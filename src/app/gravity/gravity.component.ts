@@ -44,8 +44,7 @@ export class GravityComponent implements OnInit {
       this.ball[index].update(this.height);
     }
   }
-  resize() {
-
+  resize(event: Event) {
+    this.width = window.innerWidth;
   }
-
 }
