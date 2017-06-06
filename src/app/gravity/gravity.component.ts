@@ -24,7 +24,7 @@ export class GravityComponent implements OnInit {
   ngOnInit() {
     this.ctx = this.canvasRef.nativeElement.getContext("2d");
     for (let i = 0; i < 10; i++) {
-      this.ball.push(new Ball(Math.random() * (this.width - this.radious * 2) + this.radious, this.height / 2 * Math.random(), 1, this.radious));
+      this.ball.push(new Ball(Math.random() * (this.width - this.radious * 2) + this.radious, this.height / 2 * Math.random(), Math.random()*2,1, this.radious));
     }
     this.animation();
   }
@@ -40,7 +40,7 @@ export class GravityComponent implements OnInit {
     // });
     for (let index = 0; index < this.ball.length; index++) {
       this.ball[index].draw(this.ctx);
-      this.ball[index].update(this.height);
+      this.ball[index].update(this.height, this.width);
     }
   }
   resize(event: Event) {
