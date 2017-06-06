@@ -12,7 +12,7 @@ export class GravityComponent implements OnInit {
   height: number;
   radious: number;
   @ViewChild('gravity') canvasRef: ElementRef;
-  // ctx:Canvas2DContextAttributes;
+  // ctx:Canvas2DContextAttributes; << not this !
   ctx: CanvasRenderingContext2D;
   ball: Ball[] = [];
   constructor() {
@@ -29,7 +29,7 @@ export class GravityComponent implements OnInit {
     this.animation();
   }
   animation() {
-    console.log('begin draw');
+    console.log('begin gravity');
     this.ctx.clearRect(0, 0, this.width, this.height);
     requestAnimationFrame(() => { //remember add it!!!!!!
       this.animation();
@@ -37,7 +37,6 @@ export class GravityComponent implements OnInit {
     // this.ball.forEach(function(ball, i){
     //   console.log(typeof(ball));
     //   ball[i].draw(ctx);
-
     // });
     for (let index = 0; index < this.ball.length; index++) {
       this.ball[index].draw(this.ctx);
